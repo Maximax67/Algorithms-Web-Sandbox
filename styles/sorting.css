@@ -1,0 +1,88 @@
+.algorithm-settings, .solution {
+    padding: 25px;
+    margin: 0 5%;
+    border: 2px solid #333;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.solution {
+    margin-top: 30px;
+    display: none;
+}
+
+.solution .header {
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+    font-size: 24px;
+    font-family: 'Playpen Sans', cursive;
+}
+
+.solution .steps {
+    width: 100%;
+}
+
+.solution .steps .step {
+    width: 100%;
+    padding: 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    white-space: pre-line;
+    box-sizing: border-box;
+}
+
+.solution .steps .step .label {
+    font-weight: bold;
+}
+
+.solution .steps .step .array {
+    font-family: 'Source Code Pro', monospace;
+}
+
+.algorithm-settings .input, .algorithm-settings .options {
+    padding: 8px;
+}
+
+.algorithm-settings .input label, .algorithm-settings .options label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.algorithm-settings .options option {
+    background-color: #fff;
+    color: #222;
+}
+
+#array-input, #order-select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.algorithm-settings .start {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#start-button {
+    font-size: 18px;
+    margin-top: 18px;
+    padding: 12px 24px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#start-button:hover {
+    background-color: lightskyblue;
+}
