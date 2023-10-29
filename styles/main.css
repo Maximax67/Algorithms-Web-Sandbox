@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@600&family=Roboto&family=Source+Code+Pro&display=swap');
+
+html {
+    background-color: antiquewhite;
+    font-family: 'Roboto', sans-serif;
+}
+
+.return-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: 'Playpen Sans', cursive;
+    background-color: #555;
+    border-radius: 0 0 20px;
+    color: #fff;
+    padding: 12px;
+    text-decoration: none;
+    z-index: 99;
+}
+
+.title {
+    font-size: 32px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Playpen Sans', cursive;
+}
+
+.collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.expanded:after {
+    content: "\2212";
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.category-title {
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 24px;
+    border-radius: 10px;
+}
+
+.toggle-category {
+    font-size: 24px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0 0 10px 10px;
+    z-index: 1;
+    margin-top: -10px;
+}
+
+.category-content ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    padding: 15px;
+    display: block;
+    transition: 0.2s;
+}
+
+.category-content ul li a:hover {
+    background-color: #f0f0f0;
+}
+
+.category {
+    margin: 25px 0;
+}
+
+.category-content {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0 30px;
+}
