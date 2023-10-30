@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Merge Sort</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/8puzzle.css">
+    <link rel="stylesheet" href="../styles/libs/vis.min.css">
+</head>
+<body>
+    <a href="../index.html" class="return-link">
+        <span>&#11164;</span>
+        <i>To Main page</i>
+    </a>
+
+    <div id="board">
+        <div id="board-item-1" class="board-item">1</div>
+        <div id="board-item-2" class="board-item">2</div>
+        <div id="board-item-3" class="board-item">3</div>
+        <div id="board-item-4" class="board-item">4</div>
+        <div id="board-item-5" class="board-item">5</div>
+        <div id="board-item-6" class="board-item">6</div>
+        <div id="board-item-7" class="board-item">7</div>
+        <div id="board-item-8" class="board-item">8</div>
+    </div>
+    <div id="visualization"></div>
+    <div id="controls">
+        <div class="heading">Board</div>
+        <div class="content">
+            <button id="randomize">Randomize</button>
+            <button id="customInput">Enter Custom State</button>
+        </div>
+
+        <div class="heading">Search</div>
+        <div class="content">
+            <label>Algorithm</label>
+            <select id="searchType">
+                <option value="breadthFirst">Breadth-First (BFS)</option>
+                <option value="uniformCost">Uniform-Cost</option>
+                <option value="depthFirst">Depth-First (LDFS)</option>
+                <option value="iterativeDeepening">Iterative-Deepening</option>
+                <option value="greedyBest" selected>Greedy-Best</option>
+                <option value="aStar">A*</option>
+            </select>
+            <label>Heuristic</label>
+            <select id="heuristicType">
+                <option value="manhattanDistance" selected>Manhattan distance</option>
+                <option value="euclideanDistance">Euclidean distance</option>
+                <option value="mismatches">Mismatches</option>
+            </select>
+            <label>Iteration Limit</label>
+            <input type="number" id="iterationLimit" value="10000">
+            <label>Depth Limit</label>
+            <input type="number" id="depthLimit" value="0">
+            <label style="display: none;">
+                <input type="checkbox" id="visualizationCheck" checked>
+                Visualization
+            </label>
+            <label style="display: none;">
+                <input type="checkbox" id="expandedNodeCheck">
+                Early check optimization
+            </label>
+
+            <button id="searchStep">Iterate one step</button>
+            <button id="search">Search</button>
+            <button id="searchStop" style="display: none;">Stop</button>
+            <label>Used code by deniz.co from <a href="https://deniz.co/8-puzzle-solver/">this site!</a></label>
+        </div>
+
+        <div class="heading">Search Result</div>
+        <div id="searchResult" class="content"></div>
+    </div>
+
+    <script src="../js/8puzzle/algorithm_preload.js"></script>
+
+    <script src="../js/libs/lodash.min.js"></script>
+    <script src="../js/libs/vis.min.js"></script>
+    <script src="../js/libs/bodyScrollLock.min.js"></script>
+
+    <script src="../js/8puzzle/utils.js"></script>
+    <script src="../js/8puzzle/node.js"></script>
+    <script src="../js/8puzzle/game.js"></script>
+    <script src="../js/8puzzle/board.js"></script>
+    <script src="../js/8puzzle/visualization.js"></script>
+    <script src="../js/8puzzle/search.js"></script>
+    <script src="../js/8puzzle/app.js"></script>
+</body>
+</html>
