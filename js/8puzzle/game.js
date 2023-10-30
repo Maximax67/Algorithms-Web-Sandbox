@@ -1,3 +1,5 @@
+let isFirstState = document.getElementById('desiredState').value === "first";
+
 var Game = function(opt_state) {
     this.state = opt_state || '012345678';
 };
@@ -9,9 +11,11 @@ Game.Actions = {
     RIGHT: 'right'
 };
 
-
-Game.DesiredState = '123456780';
-
+if (isFirstState) {
+    Game.DesiredState = '123456780';
+} else {
+    Game.DesiredState = '012345678';
+}
 
 Game.prototype.getAvaliableActionsAndStates = function() {
     var result = {};
@@ -94,35 +98,40 @@ Game.prototype.getManhattanDistance = function() {
 
     const oneIndex = this.state.indexOf('1');
     const onePosition = Game.indexToRowColumn(oneIndex);
-    distance += Math.abs(0 - onePosition.row) + Math.abs(0 - onePosition.column);
-
     const twoIndex = this.state.indexOf('2');
     const twoPosition = Game.indexToRowColumn(twoIndex);
-    distance += Math.abs(0 - twoPosition.row) + Math.abs(1 - twoPosition.column);
-
     const threeIndex = this.state.indexOf('3');
     const threePosition = Game.indexToRowColumn(threeIndex);
-    distance += Math.abs(0 - threePosition.row) + Math.abs(2 - threePosition.column);
-
     const fourIndex = this.state.indexOf('4');
     const fourPosition = Game.indexToRowColumn(fourIndex);
-    distance += Math.abs(1 - fourPosition.row) + Math.abs(0 - fourPosition.column);
-
     const fiveIndex = this.state.indexOf('5');
     const fivePosition = Game.indexToRowColumn(fiveIndex);
-    distance += Math.abs(1 - fivePosition.row) + Math.abs(1 - fivePosition.column);
-
     const sixIndex = this.state.indexOf('6');
     const sixPosition = Game.indexToRowColumn(sixIndex);
-    distance += Math.abs(1 - sixPosition.row) + Math.abs(2 - sixPosition.column);
-
     const sevenIndex = this.state.indexOf('7');
     const sevenPosition = Game.indexToRowColumn(sevenIndex);
-    distance += Math.abs(2 - sevenPosition.row) + Math.abs(0 - sevenPosition.column);
-
     const eightIndex = this.state.indexOf('8');
     const eightPosition = Game.indexToRowColumn(eightIndex);
-    distance += Math.abs(2 - eightPosition.row) + Math.abs(1 - eightPosition.column);
+
+    if (isFirstState) {
+        distance += Math.abs(0 - onePosition.row) + Math.abs(0 - onePosition.column);
+        distance += Math.abs(0 - twoPosition.row) + Math.abs(1 - twoPosition.column);
+        distance += Math.abs(0 - threePosition.row) + Math.abs(2 - threePosition.column);
+        distance += Math.abs(1 - fourPosition.row) + Math.abs(0 - fourPosition.column);
+        distance += Math.abs(1 - fivePosition.row) + Math.abs(1 - fivePosition.column);
+        distance += Math.abs(1 - sixPosition.row) + Math.abs(2 - sixPosition.column);
+        distance += Math.abs(2 - sevenPosition.row) + Math.abs(0 - sevenPosition.column);
+        distance += Math.abs(2 - eightPosition.row) + Math.abs(1 - eightPosition.column);
+    } else {
+        distance += Math.abs(0 - onePosition.row) + Math.abs(1 - onePosition.column);
+        distance += Math.abs(0 - twoPosition.row) + Math.abs(2 - twoPosition.column);
+        distance += Math.abs(1 - threePosition.row) + Math.abs(0 - threePosition.column);
+        distance += Math.abs(1 - fourPosition.row) + Math.abs(1 - fourPosition.column);
+        distance += Math.abs(1 - fivePosition.row) + Math.abs(2 - fivePosition.column);
+        distance += Math.abs(2 - sixPosition.row) + Math.abs(0 - sixPosition.column);
+        distance += Math.abs(2 - sevenPosition.row) + Math.abs(1 - sevenPosition.column);
+        distance += Math.abs(2 - eightPosition.row) + Math.abs(2 - eightPosition.column);
+    }
 
     return distance;
 };
@@ -135,35 +144,40 @@ Game.prototype.getEuclideanDistance = function() {
 
     const oneIndex = this.state.indexOf('1');
     const onePosition = Game.indexToRowColumn(oneIndex);
-    distance += euclideanDistance([0, 0], [onePosition.row, onePosition.column]);
-
     const twoIndex = this.state.indexOf('2');
     const twoPosition = Game.indexToRowColumn(twoIndex);
-    distance += euclideanDistance([0, 0], [onePosition.row, onePosition.column]);
-
     const threeIndex = this.state.indexOf('3');
     const threePosition = Game.indexToRowColumn(threeIndex);
-    distance += euclideanDistance([0, 2], [threePosition.row, threePosition.column]);
-
     const fourIndex = this.state.indexOf('4');
     const fourPosition = Game.indexToRowColumn(fourIndex);
-    distance += euclideanDistance([1, 0], [fourPosition.row, fourPosition.column]);
-
     const fiveIndex = this.state.indexOf('5');
     const fivePosition = Game.indexToRowColumn(fiveIndex);
-    distance += euclideanDistance([1, 1], [fivePosition.row, fivePosition.column]);
-
     const sixIndex = this.state.indexOf('6');
     const sixPosition = Game.indexToRowColumn(sixIndex);
-    distance += euclideanDistance([1, 2], [sixPosition.row, sixPosition.column]);
-
     const sevenIndex = this.state.indexOf('7');
     const sevenPosition = Game.indexToRowColumn(sevenIndex);
-    distance += euclideanDistance([2, 0], [sevenPosition.row, sevenPosition.column]);
-
     const eightIndex = this.state.indexOf('8');
     const eightPosition = Game.indexToRowColumn(eightIndex);
-    distance += euclideanDistance([2, 1], [eightPosition.row, eightPosition.column]);
+
+    if (isFirstState) {
+        distance += euclideanDistance([0, 0], [onePosition.row, onePosition.column]);
+        distance += euclideanDistance([0, 1], [twoPosition.row, twoPosition.column]);
+        distance += euclideanDistance([0, 2], [threePosition.row, threePosition.column]);
+        distance += euclideanDistance([1, 0], [fourPosition.row, fourPosition.column]);
+        distance += euclideanDistance([1, 1], [fivePosition.row, fivePosition.column]);
+        distance += euclideanDistance([1, 2], [sixPosition.row, sixPosition.column]);
+        distance += euclideanDistance([2, 0], [sevenPosition.row, sevenPosition.column]);
+        distance += euclideanDistance([2, 1], [eightPosition.row, eightPosition.column]);
+    } else {
+        distance += euclideanDistance([0, 1], [onePosition.row, onePosition.column]);
+        distance += euclideanDistance([0, 2], [twoPosition.row, twoPosition.column]);
+        distance += euclideanDistance([1, 0], [threePosition.row, threePosition.column]);
+        distance += euclideanDistance([1, 1], [fourPosition.row, fourPosition.column]);
+        distance += euclideanDistance([1, 2], [fivePosition.row, fivePosition.column]);
+        distance += euclideanDistance([2, 0], [sixPosition.row, sixPosition.column]);
+        distance += euclideanDistance([2, 1], [sevenPosition.row, sevenPosition.column]);
+        distance += euclideanDistance([2, 2], [eightPosition.row, eightPosition.column]);
+    }
 
     return distance;
 }
@@ -174,50 +188,71 @@ Game.prototype.getMismatchHeuristic = function() {
 
     const oneIndex = this.state.indexOf('1');
     const onePosition = Game.indexToRowColumn(oneIndex);
-    if (onePosition.row != 0 || onePosition.column != 0) {
-        mismatches++;
-    }
-
     const twoIndex = this.state.indexOf('2');
     const twoPosition = Game.indexToRowColumn(twoIndex);
-    if (twoPosition.row != 0 || twoPosition.column != 1) {
-        mismatches++;
-    }
-
     const threeIndex = this.state.indexOf('3');
     const threePosition = Game.indexToRowColumn(threeIndex);
-    if (threePosition.row !== 0 || threePosition.column !== 2) {
-        mismatches++;
-    }
-
     const fourIndex = this.state.indexOf('4');
     const fourPosition = Game.indexToRowColumn(fourIndex);
-    if (fourPosition.row !== 1 || fourPosition.column !== 0) {
-        mismatches++;
-    }
-
     const fiveIndex = this.state.indexOf('5');
     const fivePosition = Game.indexToRowColumn(fiveIndex);
-    if (fivePosition.row !== 1 || fivePosition.column !== 1) {
-        mismatches++;
-    }
-
     const sixIndex = this.state.indexOf('6');
     const sixPosition = Game.indexToRowColumn(sixIndex);
-    if (sixPosition.row !== 1 || sixPosition.column !== 2) {
-        mismatches++;
-    }
-
     const sevenIndex = this.state.indexOf('7');
     const sevenPosition = Game.indexToRowColumn(sevenIndex);
-    if (sevenPosition.row !== 2 || sevenPosition.column !== 0) {
-        mismatches++;
-    }
-
     const eightIndex = this.state.indexOf('8');
     const eightPosition = Game.indexToRowColumn(eightIndex);
-    if (eightPosition.row !== 2 || eightPosition.column !== 1) {
-        mismatches++;
+
+    if (isFirstState) {
+        if (onePosition.row != 0 || onePosition.column != 0) {
+            mismatches++;
+        }
+        if (twoPosition.row != 0 || twoPosition.column != 1) {
+            mismatches++;
+        }
+        if (threePosition.row !== 0 || threePosition.column !== 2) {
+            mismatches++;
+        }
+        if (fourPosition.row !== 1 || fourPosition.column !== 0) {
+            mismatches++;
+        }
+        if (fivePosition.row !== 1 || fivePosition.column !== 1) {
+            mismatches++;
+        }
+        if (sixPosition.row !== 1 || sixPosition.column !== 2) {
+            mismatches++;
+        }
+        if (sevenPosition.row !== 2 || sevenPosition.column !== 0) {
+            mismatches++;
+        }
+        if (eightPosition.row !== 2 || eightPosition.column !== 1) {
+            mismatches++;
+        }
+    } else {
+        if (onePosition.row != 0 || onePosition.column != 1) {
+            mismatches++;
+        }
+        if (twoPosition.row != 0 || twoPosition.column != 2) {
+            mismatches++;
+        }
+        if (threePosition.row !== 1 || threePosition.column !== 0) {
+            mismatches++;
+        }
+        if (fourPosition.row !== 1 || fourPosition.column !== 1) {
+            mismatches++;
+        }
+        if (fivePosition.row !== 1 || fivePosition.column !== 2) {
+            mismatches++;
+        }
+        if (sixPosition.row !== 2 || sixPosition.column !== 0) {
+            mismatches++;
+        }
+        if (sevenPosition.row !== 2 || sevenPosition.column !== 1) {
+            mismatches++;
+        }
+        if (eightPosition.row !== 2 || eightPosition.column !== 2) {
+            mismatches++;
+        }
     }
 
     return mismatches;

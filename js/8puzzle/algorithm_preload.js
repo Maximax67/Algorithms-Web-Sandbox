@@ -9,7 +9,6 @@ function optionExistsInSelect(selectId, value) {
     const select = document.getElementById(selectId);
     console.log(value)
     for (let option of select.options) {
-        console.log(option.value)
         if (option.value === value) {
             return true;
         }

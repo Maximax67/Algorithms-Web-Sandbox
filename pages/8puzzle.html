@@ -45,9 +45,15 @@
             </select>
             <label>Heuristic</label>
             <select id="heuristicType">
+                <option value="none">None</option>
                 <option value="manhattanDistance" selected>Manhattan distance</option>
                 <option value="euclideanDistance">Euclidean distance</option>
                 <option value="mismatches">Mismatches</option>
+            </select>
+            <label>Desired State</label>
+            <select id="desiredState">
+                <option value="first" selected>123456780</option>
+                <option value="second">012345678</option>
             </select>
             <label>Iteration Limit</label>
             <input type="number" id="iterationLimit" value="10000">

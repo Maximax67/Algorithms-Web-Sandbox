@@ -10,7 +10,8 @@ const SearchType = {
 const HeuristicTypes = {
     MANHATTAN_DISTANCE: 'manhattanDistance',
     EUCLIDEAN_DISTANCE: 'euclideanDistance',
-    MISMATCHES: 'mismatches'
+    MISMATCHES: 'mismatches',
+    NONE: 'none'
 };
 
 function search(opt_options) {
@@ -31,6 +32,13 @@ function search(opt_options) {
     }, opt_options || {});
 
     Board.draw(options.node.state);
+
+    isFirstState = document.getElementById('desiredState').value === "first";
+    if (isFirstState) {
+        Game.DesiredState = '123456780';
+    } else {
+        Game.DesiredState = '012345678';
+    }
 
     if (options.node.game.isFinished()) {
         return options.callback(null, options);
@@ -149,12 +157,17 @@ function getNextNode(options) {
                     return node.game.getEuclideanDistance();
                 }
 
-                return node.game.getMismatchHeuristic();
+                if (options.heuristic === HeuristicTypes.MISMATCHES) {
+                    return node.game.getMismatchHeuristic();
+                }
+
+                return 0;
             });
 
             _.remove(options.frontierList, bestNode);
 
             return bestNode;
+
         case SearchType.A_STAR:
             var bestNode = _.minBy(options.frontierList, function(node) {
                 if (options.heuristic === HeuristicTypes.MANHATTAN_DISTANCE) {
@@ -165,7 +178,11 @@ function getNextNode(options) {
                     return node.game.getEuclideanDistance() + node.cost;
                 }
 
-                return node.game.getMismatchHeuristic() + node.cost;
+                if (options.heuristic === HeuristicTypes.MISMATCHES) {
+                    return node.game.getMismatchHeuristic() + node.cost;
+                }
+
+                return node.cost;
             });
 
             _.remove(options.frontierList, bestNode);
@@ -175,3 +192,4 @@ function getNextNode(options) {
             throw new Error('Unsupported search type');
     }
 }
+

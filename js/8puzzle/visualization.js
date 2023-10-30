@@ -58,13 +58,18 @@ Visualization.importData = function(expandedNodes, frontierList, opt_winnerNode,
         else if (heuristicTypeSelectbox.value === HeuristicTypes.EUCLIDEAN_DISTANCE) {
             node_heuristic = node.game.getEuclideanDistance().toFixed(4);
         }
-        else {
+        else if (heuristicTypeSelectbox.value === HeuristicTypes.MISMATCHES) {
             node_heuristic = node.game.getMismatchHeuristic();
+        }
+
+        let h = "";
+        if (heuristicTypeSelectbox.value !== HeuristicTypes.NONE) {
+            h = ', E:' + node_heuristic;
         }
 
         data.nodes.push({
             id: node.state,//012345678
-            label: node.state.splice(6, 0, '\n').splice(3, 0, '\n') + '\nD:' + node.depth + ', E:' + node_heuristic,
+            label: node.state.splice(6, 0, '\n').splice(3, 0, '\n') + '\nD:' + node.depth + h,
             color: winners[node.state] ? (opt_winnerColor || '#ccff33') : color
         });
 

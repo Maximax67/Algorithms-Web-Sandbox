@@ -1,12 +1,10 @@
-let game = new Game();
-Board.draw(game.state);
-
 const boardDiv = document.getElementById('board');
 const controlsDiv = document.getElementById('controls');
 const randomizeButton = document.getElementById('randomize');
 const customInputButton = document.getElementById('customInput');
 const searchTypeSelectbox = document.getElementById('searchType');
 const heuristicTypeSelectbox = document.getElementById('heuristicType');
+const desiredStateSelectbox = document.getElementById('desiredState');
 const iterationLimitInput = document.getElementById('iterationLimit');
 const depthLimitInput = document.getElementById('depthLimit');
 const searchButton = document.getElementById('search');
@@ -15,6 +13,9 @@ const searchStepButton = document.getElementById('searchStep');
 const expandedNodeCheckbox = document.getElementById('expandedNodeCheck');
 const searchResultDiv = document.getElementById('searchResult');
 const visualizationCheckbox = document.getElementById('visualizationCheck');
+
+let game = new Game();
+Board.draw(game.state);
 
 let searchStepOptions = null;
 
