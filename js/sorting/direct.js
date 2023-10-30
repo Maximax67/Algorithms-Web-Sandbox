@@ -96,6 +96,19 @@ function directMergeSort(array, is_ascending = true) {
             }
         }
 
+        if (pos1 !== array1.length) {
+            while (pos1 < array1.length) {
+                merged_array.push(array1[pos1]);
+                pos1++;
+            }
+        }
+        else if (pos2 !== array2.length) {
+            while (pos2 < array2.length) {
+                merged_array.push(array2[pos2]);
+                pos2++;
+            }
+        }
+
         return merged_array;
     }
 
