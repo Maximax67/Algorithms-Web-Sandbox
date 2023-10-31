@@ -25,7 +25,6 @@ class IDSSolver extends QueenProblemSolver {
             for (let nextState of possibleBoards) {
                 result = this.LDFS(nextState.board, limit, path);
                 if (result !== null) {
-                    console.log(nextState.move);
                     path.push({bestMove: nextState.move, possibleBoards, result, limit});
                     return result;
                 }

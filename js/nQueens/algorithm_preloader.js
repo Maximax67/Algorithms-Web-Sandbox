@@ -7,7 +7,6 @@ function getQueryParam(name) {
 // Function to check if a value exists in a select element
 function optionExistsInSelect(selectId, value) {
     const select = document.getElementById(selectId);
-    console.log(value)
     for (let option of select.options) {
         if (option.value === value) {
             return true;

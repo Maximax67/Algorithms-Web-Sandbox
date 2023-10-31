@@ -1,11 +1,11 @@
 class AStarSolver extends QueenProblemSolver {
-    searchSolution(startNode, path) {
+    searchSolution(startNode, path, solutionInfo) {
         this.resetStat();
-        let result = this.AStarSearch(startNode, path);
+        let result = this.AStarSearch(startNode, path, solutionInfo);
         return result;
     }
 
-    AStarSearch(node, path) {
+    AStarSearch(node, path, solutionInfo) {
         if (node.isSolved()) return node;
 
         this.Iterations += 1;
@@ -18,11 +18,22 @@ class AStarSolver extends QueenProblemSolver {
 
         let closedSet = new Set();
 
+        let step = 1;
+
+        solutionInfo["INIT"] = {
+            openSet,
+            closedSet
+        };
+
         while (openSet.length > 0) {
             let currentNode = this.findLowestFScoreNode(openSet);
 
             if (currentNode.isSolved()) {
-                this.updatePath(path, currentNode);
+                solutionInfo['Solution found'] = {
+                    currentNode
+                }
+
+                this.updatePath(path, currentNode, solutionInfo);
                 return currentNode;
             }
 
@@ -30,9 +41,15 @@ class AStarSolver extends QueenProblemSolver {
             closedSet.add(currentNode);
 
             let possibleBoards = currentNode.getPossibleBoards();
-            console.log(possibleBoards);
             if (possibleBoards.length === 0) {
                 this.CountOfDeadEnds += 1;
+            }
+
+            solutionInfo[`Step ${step}: Find node`] = {
+                currentNode,
+                openSet,
+                closedSet,
+                possibleBoards
             }
 
             this.CountOfStates += possibleBoards.length;
@@ -57,6 +74,15 @@ class AStarSolver extends QueenProblemSolver {
                     }
                 }
             }
+
+            solutionInfo[`Step ${step}: Process Node`] = {
+                currentNode,
+                openSet,
+                closedSet,
+                possibleBoards
+            };
+
+            step++;
         }
 
         return null;
@@ -80,10 +106,17 @@ class AStarSolver extends QueenProblemSolver {
         return board.countConflicts();
     }
 
-    updatePath(path, currentNode) {
+    updatePath(path, currentNode, solutionInfo) {
+        let step = 1;
+        solutionInfo['Backtracking Solution'] = {currentNode};
         while (currentNode.parent) {
+            solutionInfo['Backtracking Solution'][`Step ${step}`] = {
+                "parent node": currentNode.parent,
+                "move": currentNode.parent_move
+            }
             path.push({ bestMove: currentNode.parent_move });
             currentNode = currentNode.parent;
+            step++;
         }
         path.reverse();
     }

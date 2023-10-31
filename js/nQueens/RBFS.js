@@ -24,8 +24,6 @@ class RBFSSolver extends QueenProblemSolver {
             estimations.push({ f: state.board.countConflicts(), board: state.board, move: state.move });
         });
 
-        console.log(estimations);
-
         do {
             estimations.sort((a, b) => a.f - b.f);
             let bestEstimate = estimations[0].f;

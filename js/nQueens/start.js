@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
             initialQueens.push({ Y: row, X: col });
         }
 
-        console.log(initialQueens);
         updateInitialBoard();
     }
 
@@ -135,26 +134,35 @@ document.addEventListener("DOMContentLoaded", function () {
         const path = [];
 
         let solver;
+        let isSolved;
+        let globalSolution = {};
 
         if (algorithmInput.value == algorithms.RBFS) {
             solver = new RBFSSolver();
+            isSolved = solver.searchSolution(board, path).isSolved();
         } else if (algorithmInput.value == algorithms.IDS) {
             solver = new IDSSolver();
+            isSolved = solver.searchSolution(board, path).isSolved();
         } else {
             solver = new AStarSolver();
+            isSolved = solver.searchSolution(board, path, globalSolution).isSolved();
         }
 
-        const solutionBoard = solver.searchSolution(board, path);
-
-        if (solutionBoard.isSolved()) {
+        if (isSolved) {
             printSolutionStep(`Solution found! Total Steps: ${path.length}`);
             printSolutionStep('Initial board', '', size, solvingQueens);
+            if (globalSolution) {
+                const solutionInfoDiv = document.createElement('div');
+                solutionInfoDiv.classList.add('objects');
+                createTree(globalSolution, solutionInfoDiv);
+                printSolutionStep(`Solution:`, solutionInfoDiv);
+            }
 
             path.forEach((solution, index) => {
                 moveQueen(solvingQueens, solution.bestMove);
 
                 const solutionInfoDiv = document.createElement('div');
-                solutionInfoDiv.classList.add('estimations');
+                solutionInfoDiv.classList.add('objects');
                 createTree(solution, solutionInfoDiv);
 
                 printSolutionStep(`Step: ${index + 1}`, solutionInfoDiv, size, solvingQueens);
