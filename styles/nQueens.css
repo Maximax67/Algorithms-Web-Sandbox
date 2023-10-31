@@ -1,0 +1,189 @@
+.algorithm-settings, .solution {
+    padding: 25px;
+    margin: 0 5%;
+    border: 2px solid #333;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.solution {
+    margin-top: 30px;
+    display: none;
+}
+
+.solution .header {
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+    font-size: 24px;
+    font-family: 'Playpen Sans', cursive;
+}
+
+.solution .steps {
+    width: 100%;
+}
+
+.solution .steps .step {
+    width: 100%;
+    padding: 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    white-space: pre-line;
+    box-sizing: border-box;
+}
+
+.algorithm-settings .input, .algorithm-settings .options {
+    padding: 8px;
+}
+
+.algorithm-settings .input label, .algorithm-settings .options label {
+    width: 100%;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.algorithm-settings .options option {
+    background-color: #fff;
+    color: #222;
+}
+
+#array-input, #algorithm-select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#algorithm-select {
+    width: 20%;
+}
+
+#size-input {
+    width: 20%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#set-size-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.collapsed, .expanded {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    text-align: left;
+    width: 100%;
+    outline: none;
+}
+
+.collapsed:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.expanded:after {
+    content: '\2212';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.estimations {
+    margin: 20px;
+}
+
+.final-value {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.content {
+    display: none;
+    padding: 10px;
+}
+
+.algorithm-settings .start {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#start-button {
+    font-size: 18px;
+    margin-top: 18px;
+    padding: 12px 24px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#start-button:hover, #set-size-button:hover {
+    background-color: lightskyblue;
+}
+
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(var(--board-size), 1fr);
+    grid-template-rows: repeat(var(--board-size), 1fr);
+    border: 2px solid #000;
+    width: 300px;
+    /* You can adjust the width as needed */
+    height: 300px;
+    /* You can adjust the height as needed */
+}
+
+.chess-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.chess-cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    /* Adjust font size as needed */
+    border: 1px solid #000;
+    /* Add cell borders */
+}
+
+.queen {
+    background-color: #ff0000;
+    /* You can use any color you like for the queen cells */
+    color: #fff;
+    /* Text color for queen cells */
+    /* Make it a circle */
+}

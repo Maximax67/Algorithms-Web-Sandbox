@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Queens</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/nQueens.css">
+</head>
+<body>
+    <a href="../index.html" class="return-link">
+        <span>&#11164;</span>
+        <i>To Main page</i>
+    </a>
+    <p class="title">N-Queens Problem</p>
+
+    <div class="algorithm-settings">
+        <div class="input">
+            <label for="size-input">Enter size of the board:</label>
+            <input type="text" id="size-input" placeholder="e.g., 8" value="8">
+            <button id="set-size-button">Set</button>
+        </div>
+        <div class="options">
+            <label for="algorithm-select">Select Algorithm:</label>
+            <select id="algorithm-select">
+                <option value="ids">IDS</option>
+                <option value="rbfs">RBFS</option>
+                <option value="aStar" selected>A*</option>
+            </select>
+        </div>
+        <div class="board-container">
+            <p class="board-title">Set Initial Position:</p>
+            <div id="initial-board" class="chess-board"></div>
+        </div>
+        <div class="start">
+            <button id="start-button">Start Solving</button>
+        </div>
+    </div>
+
+    <div class="solution">
+        <p class="header">Solution</p>
+        <div id="solution-steps" class="steps">
+
+        </div>
+    </div>
+
+    <script src="../js/nQueens/algorithm_preloader.js"></script>
+    <script src="../js/nQueens/nQueens.js"></script>
+    <script src="../js/nQueens/IDS.js"></script>
+    <script src="../js/nQueens/RBFS.js"></script>
+    <script src="../js/nQueens/AStar.js"></script>
+    <script src="../js/nQueens/utils.js"></script>
+    <script src="../js/nQueens/start.js"></script>
+</body>
+</html>

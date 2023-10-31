@@ -4,7 +4,6 @@
     height: 150px;
     top: 50px;
     left: 0;
-    /*box-sizing: border-box;*/
     border: 10px solid #ccc;
     background-color: white;
 }
