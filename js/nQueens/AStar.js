@@ -1,14 +1,12 @@
 class AStarSolver extends QueenProblemSolver {
-    searchSolution(startNode, path, solutionInfo) {
+    searchSolution(startNode, path, maxIter, solutionInfo) {
         this.resetStat();
-        let result = this.AStarSearch(startNode, path, solutionInfo);
+        let result = this.AStarSearch(startNode, path, maxIter, solutionInfo);
         return result;
     }
 
-    AStarSearch(node, path, solutionInfo) {
+    AStarSearch(node, path, maxIter, solutionInfo) {
         if (node.isSolved()) return node;
-
-        this.Iterations += 1;
 
         let openSet = [node];
 
@@ -27,6 +25,15 @@ class AStarSolver extends QueenProblemSolver {
 
         while (openSet.length > 0) {
             let currentNode = this.findLowestFScoreNode(openSet);
+
+            if (this.Iterations > maxIter) {
+                solutionInfo['MAX iter reached'] = {
+                    currentNode
+                }
+
+                this.updatePath(path, currentNode, solutionInfo);
+                return currentNode;
+            }
 
             if (currentNode.isSolved()) {
                 solutionInfo['Solution found'] = {
@@ -83,6 +90,7 @@ class AStarSolver extends QueenProblemSolver {
             };
 
             step++;
+            this.Iterations += 1;
         }
 
         return null;

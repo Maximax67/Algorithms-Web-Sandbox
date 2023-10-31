@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sizeInput = document.getElementById("size-input");
     const setSizeButton = document.getElementById("set-size-button");
     const algorithmInput = document.getElementById("algorithm-select");
+    const maxIterInput = document.getElementById("max-iter-input");
     const startButton = document.getElementById("start-button");
     const solutionSteps = document.getElementById("solution-steps");
     const solutionDiv = document.getElementsByClassName("solution")[0];
@@ -126,6 +127,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     startButton.addEventListener("click", function () {
+        const maxIter = parseInt(maxIterInput.value);
+
+        if (isNaN(maxIter) || maxIter < 1) {
+            alert("Please enter a max iterations (a positive integer).");
+            return;
+        }
+
         solutionSteps.innerHTML = ""; // Clear previous solutions
 
         let solvingQueens = deepCopy(initialQueens);
@@ -139,17 +147,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (algorithmInput.value == algorithms.RBFS) {
             solver = new RBFSSolver();
-            isSolved = solver.searchSolution(board, path).isSolved();
+            isSolved = solver.searchSolution(board, path, maxIter);
         } else if (algorithmInput.value == algorithms.IDS) {
             solver = new IDSSolver();
-            isSolved = solver.searchSolution(board, path).isSolved();
+            isSolved = solver.searchSolution(board, path, maxIter).isSolved();
         } else {
             solver = new AStarSolver();
-            isSolved = solver.searchSolution(board, path, globalSolution).isSolved();
+            isSolved = solver.searchSolution(board, path, maxIter, globalSolution).isSolved();
         }
 
         if (isSolved) {
             printSolutionStep(`Solution found! Total Steps: ${path.length}`);
+            
             printSolutionStep('Initial board', '', size, solvingQueens);
             if (globalSolution) {
                 const solutionInfoDiv = document.createElement('div');
@@ -169,6 +178,23 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         } else {
             printSolutionStep(`NO Solution found!`);
+            printSolutionStep('Initial board', '', size, solvingQueens);
+            if (globalSolution) {
+                const solutionInfoDiv = document.createElement('div');
+                solutionInfoDiv.classList.add('objects');
+                createTree(globalSolution, solutionInfoDiv);
+                printSolutionStep(`Solution:`, solutionInfoDiv);
+            }
+
+            path.forEach((solution, index) => {
+                moveQueen(solvingQueens, solution.bestMove);
+
+                const solutionInfoDiv = document.createElement('div');
+                solutionInfoDiv.classList.add('objects');
+                createTree(solution, solutionInfoDiv);
+
+                printSolutionStep(`Step: ${index + 1}`, solutionInfoDiv, size, solvingQueens);
+            });
         }
 
         solutionDiv.style.display = 'block';

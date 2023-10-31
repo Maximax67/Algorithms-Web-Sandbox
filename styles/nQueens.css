@@ -49,7 +49,7 @@
     color: #222;
 }
 
-#array-input, #algorithm-select {
+#array-input, #algorithm-select, #max-iter-input {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -58,7 +58,7 @@
     font-size: 16px;
 }
 
-#algorithm-select {
+#algorithm-select, #max-iter-input {
     width: 20%;
 }
 

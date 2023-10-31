@@ -1,11 +1,15 @@
 class RBFSSolver extends QueenProblemSolver {
-    searchSolution(startNode, path) {
+    searchSolution(startNode, path, maxIter) {
         this.resetStat();
-        return this.RBFSRecursive(startNode, Infinity, path).board;
+        return this.RBFSRecursive(startNode, maxIter, Infinity, path).board;
     }
 
-    RBFSRecursive(node, fLimit, path) {
+    RBFSRecursive(node, maxIter, fLimit, path) {
         if (node.isSolved()) return { board: node, newF: 0 };
+
+        if (this.Iterations >= maxIter) {
+            return { board: node.board, newF: 0 };
+        }
 
         this.Iterations += 1;
 
@@ -32,7 +36,7 @@ class RBFSSolver extends QueenProblemSolver {
 
             let alternative = estimations[1].f;
             if (bestEstimate > fLimit) return { board: null, newF: bestEstimate };
-            result = this.RBFSRecursive(bestState, Math.min(fLimit, alternative), path);
+            result = this.RBFSRecursive(bestState, maxIter, Math.min(fLimit, alternative), path);
 
             if (result.board === null) {
                 estimations[0] = { f: result.newF, board: bestState, move: bestMove };
